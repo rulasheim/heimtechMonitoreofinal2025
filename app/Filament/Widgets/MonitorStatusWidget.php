@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MonitorStatusWidget extends BaseWidget
 {
-    protected static ?int $pollingInterval = 5; // refresca cada 5 segundos
+    // 🔥 Auto-refresh cada 5 segundos (formato correcto en Filament 3)
+    protected static ?string $pollingInterval = '5s';
 
     protected static ?string $heading = 'Estado de Monitoreo';
 

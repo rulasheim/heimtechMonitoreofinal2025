@@ -49,6 +49,8 @@ class InfrastructureCredentialResource extends Resource
 
             Forms\Components\TextInput::make('password')
                 ->label('Contraseña')
+                    ->revealable() // 👈 Permite mostrar/ocultar la contraseña
+
                 ->password()
                 ->required(),
 

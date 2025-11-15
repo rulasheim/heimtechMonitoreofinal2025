@@ -36,27 +36,29 @@ class UserResource extends Resource
                     ->required(),
 
                 Forms\Components\Select::make('role')
-                    ->label('Rol')
-                    ->options([
-                        'admin' => 'Administrador',
-                        'ingeniero' => 'Ingeniero',
-                        'soporte' => 'Soporte',
-                        'cliente' => 'Cliente',
-                    ])
-                    ->default('cliente')
-                    ->required(),
+    ->label('Rol')
+    ->options([
+        'administrador' => 'Administrador',
+        'supervisor' => 'Supervisor',
+    ])
+    ->required()
+    ->native(false)
+    ->default('supervisor'),
+
 
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo')
                     ->default(true),
 
                 Forms\Components\TextInput::make('password')
-                    ->label('Contraseña')
-                    ->password()
-                    ->required(fn (string $context): bool => $context === 'create')
-                    ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->maxLength(255),
+    ->label('Contraseña')
+    ->password()
+    ->revealable() // 👈 Permite mostrar/ocultar la contraseña
+    ->required(fn (string $context) => $context === 'create')
+    ->dehydrateStateUsing(fn ($state) => !empty($state) ? Hash::make($state) : null)
+    ->dehydrated(fn ($state) => filled($state))
+    ->autocomplete('new-password'),
+
             ]);
     }
 

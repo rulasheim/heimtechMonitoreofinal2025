@@ -53,11 +53,20 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-                \App\Filament\Widgets\MonitorStats::class,   // 👈 agrega esto
+    // 🟦 Zona 1 – Tarjetas KPI (arriba)
+    \App\Filament\Widgets\MonitorStats::class,
 
-            ])
+    // 🟥 Zona 2 – Hosts caídos (alertas críticas)
+    \App\Filament\Widgets\DownHostsWidget::class,
+
+    // 🟩 Zona 3 – Estado general de monitoreo
+    \App\Filament\Widgets\MonitorStatusWidget::class,
+
+    // Widgets estándar de Filament (opcionales)
+    Widgets\AccountWidget::class,
+    Widgets\FilamentInfoWidget::class,
+])
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

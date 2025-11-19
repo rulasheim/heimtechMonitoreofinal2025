@@ -10,7 +10,7 @@ class MonitorStats extends BaseWidget
 {
     // 🔥 Auto-refresh cada 5 segundos (tipo correcto: ?string)
     protected static ?string $pollingInterval = '5s';
-
+    
     protected function getStats(): array
     {
         $total = MonitorTarget::count();
